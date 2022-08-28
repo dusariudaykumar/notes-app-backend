@@ -1,10 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 const connextDB = require("./db/connectDB");
 const cookiePraser = require("cookie-parser");
 const app = express();
 const isLoggedin = require("./middleware/isLoggedin");
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
