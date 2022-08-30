@@ -3,7 +3,8 @@ const Trash = require("../models/trash");
 const Archive = require("../models/archive");
 // Get All Notes
 const getAllNotes = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.user;
+
   try {
     const notes = await Notes.find({ userId }).populate(
       "userId",
@@ -26,7 +27,7 @@ const createNotes = async (req, res) => {
       .status(404)
       .json({ success: false, message: "please enter title and body" });
   }
-  const userId = req.user._id;
+  const userId = req.user;
 
   try {
     const note = await Notes.create({ title, body, bgcolor, userId });

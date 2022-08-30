@@ -8,7 +8,7 @@ const deleteNotes = async (notesId) => {
 };
 
 const getAllNotesFromArchive = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.user;
   try {
     const archive = await Archive.find({ userId }).populate(
       "userId",
@@ -34,7 +34,7 @@ const deleteArchiveNotes = async (req, res) => {
         .json({ success: false, message: "Notes not found" });
     }
     const deletedNotes = await deleteNotes(notesId);
-    console.log(deletedNotes);
+
     const addToTrash = await Trash.create({
       title: deletedNotes.title,
       body: deletedNotes.body,
@@ -62,7 +62,7 @@ const UnarchiveNotes = async (req, res) => {
         .json({ success: false, message: "Notes not found" });
     }
     const deletedNotes = await deleteNotes(notesId);
-    console.log(deletedNotes);
+
     const restoreToNotes = await Notes.create({
       title: deletedNotes.title,
       body: deletedNotes.body,

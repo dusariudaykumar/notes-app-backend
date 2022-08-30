@@ -3,7 +3,7 @@ const Notes = require("../models/notes");
 
 // get all tashed notes
 const getAllTrashNotes = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.user;
 
   try {
     const trashNotes = await Trash.find({ userId }).populate(

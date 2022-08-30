@@ -3,23 +3,23 @@ const jwt = require("jsonwebtoken");
 
 const isLoggedin = async (req, res, next) => {
   const token = req.headers.authorization;
+  if (!token) {
+    res.status(401).json({
+      success: false,
+      message: "Authorization error. Invalid token.",
+    });
+    return;
+  }
   try {
     // const token = req.cookies.token;
-    if (!token) {
-      res.status(401).json({
-        success: false,
-        message: "please login",
-      });
-    }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    req.user = await User.findById({ _id: decoded.userId });
+    req.user = decoded.userId;
 
     next();
   } catch (error) {
-    res.status(500).json({
+    return res.status(401).json({
       success: false,
-      message: error,
+      message: "Authorization error. User not found.",
     });
   }
 };
