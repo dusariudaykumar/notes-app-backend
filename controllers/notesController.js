@@ -23,7 +23,7 @@ const getAllNotes = async (req, res) => {
 const createNotes = async (req, res) => {
   const { title, body, bgcolor } = req.body;
   if (!title || !body) {
-    res
+    return res
       .status(404)
       .json({ success: false, message: "please enter title and body" });
   }
