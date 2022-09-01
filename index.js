@@ -8,7 +8,8 @@ const isLoggedin = require("./middleware/isLoggedin");
 //middleware
 app.use(
   cors({
-    origin: "*",['GET','POST','DELETE','UPDATE','PUT','PATCH']
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
 app.use(express.json());
