@@ -14,9 +14,9 @@ const getAllNotesFromArchive = async (req, res) => {
       "userId",
       "name email _id"
     );
-    res.status(200).json({ success: true, archive });
+    return res.status(200).json({ success: true, archive });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Somthing went wrong.Please try again!",
     });
@@ -41,9 +41,11 @@ const deleteArchiveNotes = async (req, res) => {
       bgcolor: deletedNotes.bgcolor,
       userId: deletedNotes.userId,
     });
-    res.status(200).json({ succes: true, message: "Deleted from archive" });
+    return res
+      .status(200)
+      .json({ succes: true, message: "Deleted from archive" });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Somthing went wrong.Please try again!",
     });
@@ -69,9 +71,9 @@ const UnarchiveNotes = async (req, res) => {
       bgcolor: deletedNotes.bgcolor,
       userId: deletedNotes.userId,
     });
-    res.status(200).json({ succes: true, message: "Notes Unarchived" });
+    return res.status(200).json({ succes: true, message: "Notes Unarchived" });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Somthing went wrong.Please try again!",
     });

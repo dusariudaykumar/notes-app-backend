@@ -10,9 +10,9 @@ const getAllTrashNotes = async (req, res) => {
       "userId",
       "name email _id"
     );
-    res.status(200).json({ success: true, trashNotes });
+    return res.status(200).json({ success: true, trashNotes });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Somthing went wrong.Please try again!",
     });
@@ -38,7 +38,7 @@ const deleteTrashNotes = async (req, res) => {
       .status(201)
       .json({ success: true, message: "Notes deleted from trash" });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "somthing went wrong please try again",
     });
@@ -71,7 +71,7 @@ const restoreNotes = async (req, res) => {
       .status(201)
       .json({ success: true, message: "Notes restored from trash" });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "somthing went wrong please try again",
     });

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const isLoggedin = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    res.status(401).json({
+    return res.status(401).json({
       success: false,
       message: "Authorization error. Invalid token.",
     });

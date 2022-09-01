@@ -10,9 +10,9 @@ const getAllNotes = async (req, res) => {
       "userId",
       "name email _id"
     );
-    res.status(200).json({ success: true, notes });
+    return res.status(200).json({ success: true, notes });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Somthing went wrong.Please try again!",
     });
@@ -33,9 +33,11 @@ const createNotes = async (req, res) => {
     const note = await Notes.create({ title, body, bgcolor, userId });
     //
 
-    res.status(201).json({ success: true, note });
+    return res.status(201).json({ success: true, note });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Somthing went wrong" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Somthing went wrong" });
   }
 };
 
@@ -57,9 +59,9 @@ const updateNotes = async (req, res) => {
       note.bgcolor = bgcolor;
     }
     const updatedNotes = await note.save();
-    res.status(200).json({ success: true, updatedNotes });
+    return res.status(200).json({ success: true, updatedNotes });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "somthing went wrong please try again",
     });
@@ -88,9 +90,9 @@ const deleteNotes = async (req, res) => {
       userId: deletedNotes.userId,
     });
 
-    res.status(200).json({ success: true, message: "Notes deleted" });
+    return res.status(200).json({ success: true, message: "Notes deleted" });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "somthing went wrong please try again",
     });
@@ -118,12 +120,12 @@ const addToArchive = async (req, res) => {
       userId: deletedNotes.userId,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Notes added to archive",
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "somthing went wrong please try again",
     });
