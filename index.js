@@ -6,7 +6,11 @@ const cookiePraser = require("cookie-parser");
 const app = express();
 const isLoggedin = require("./middleware/isLoggedin");
 //middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",['GET','POST','DELETE','UPDATE','PUT','PATCH']
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
