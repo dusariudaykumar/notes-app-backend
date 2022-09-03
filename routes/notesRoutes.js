@@ -9,7 +9,7 @@ const {
 } = require("../controllers/notesController");
 
 router.route("/notes").get(getAllNotes);
-router.route("/create").post(createNotes);
+router.route("/notes/create").post(createNotes);
 router
   .route("/notes/:notesId")
   .patch(updateNotes)
