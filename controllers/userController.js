@@ -30,8 +30,8 @@ const signupUser = async (req, res) => {
       return res.status(201).json({
         success: true,
         message: "Signup successfull",
+        token,
         user: {
-          token,
           _id: user._id,
           name: user.name,
           email: user.email,
@@ -78,8 +78,8 @@ const signinUser = async (req, res) => {
     return res.status(201).json({
       success: true,
       message: "Login successfull",
+      token,
       user: {
-        token,
         _id: user._id,
         name: user.name,
         email: user.email,
