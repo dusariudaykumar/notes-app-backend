@@ -32,7 +32,6 @@ const createNotes = async (req, res) => {
   try {
     const note = await Notes.create({ title, body, bgcolor, userId });
     //
-
     return res.status(201).json({ success: true, note });
   } catch (error) {
     return res
@@ -83,11 +82,13 @@ const deleteNotes = async (req, res) => {
     const deletedNotes = await Notes.findByIdAndDelete({ _id: notesId });
 
     // After deleting notes adding it to  trash
-    const addTrash = await Archive.create({
+    const addTrash = await Trash.create({
       title: deletedNotes.title,
       body: deletedNotes.body,
       bgcolor: deletedNotes.bgcolor,
       userId: deletedNotes.userId,
+      createdAt: deletedNotes.createdAt,
+      updatedAt: deletedNotes.updatedAt,
     });
 
     return res.status(200).json({ success: true, message: "Notes deleted" });
