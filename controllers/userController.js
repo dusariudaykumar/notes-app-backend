@@ -6,7 +6,7 @@ const signupUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
-      return res.status(500).json({
+      return res.status(400).json({
         success: false,
         message: "please provide all fields",
       });
@@ -51,7 +51,7 @@ const signinUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(500).json({
+      return res.status(400).json({
         success: false,
         message: "please provide email and password",
       });
@@ -60,7 +60,7 @@ const signinUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(500).json({
+      return res.status(404).json({
         success: false,
         message: "The email you entered is not Registered.",
       });
@@ -75,7 +75,7 @@ const signinUser = async (req, res) => {
     }
 
     const token = getJwtToken(user._id);
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       message: "Login successfull",
       token,
